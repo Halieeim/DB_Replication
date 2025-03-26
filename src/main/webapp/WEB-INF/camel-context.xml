@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring https://camel.apache.org/schema/spring/camel-spring.xsd">
+    <bean class="org.wildfly.camel.examples.cdi.ReplicationValidation" id="ReplicationValidationBean"/>
+    <!--
+	<bean class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" id="entityManagerFactoryPostgres">
+		<property name="persistenceUnitName" value="camel" />
+	</bean>
+
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager" id="jpaTxManagerPostgres">
+		<property name="entityManagerFactory" ref="entityManagerFactoryPostgres" />
+	</bean>
+
+	<bean class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" id="entityManagerFactoryMssql">
+		<property name="persistenceUnitName" value="mssql" />
+	</bean>
+
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager" id="jpaTxManagerMssql">
+		<property name="entityManagerFactory" ref="entityManagerFactoryMssql" />
+	</bean> 
+
+	<bean class="org.apache.camel.component.jpa.JpaComponent" id="jpaPostgres">
+		<property name="entityManagerFactory" ref="entityManagerFactoryPostgres" />
+	</bean>
+
+	<bean class="org.apache.camel.component.jpa.JpaComponent" id="jpaMssql">
+		<property name="entityManagerFactory" ref="entityManagerFactoryMssql" />
+	</bean>-->
+    <camelContext id="spring-context" xmlns="http://camel.apache.org/schema/spring">
+        <route id="_route1">
+            <!--from id="dailyTaskRoute" uri="quartz2://myScheduler?cron=0+16+16+*+*+?" /> -->
+            <from id="fixedRateRoute" uri="quartz2://myScheduler?trigger.repeatInterval=60000&amp;trigger.repeatCount=-1"/>
+            <log id="logging0" message="Before calling bean"/>
+            <bean id="_bean1" ref="ReplicationValidationBean"/>
+            <log id="logging1" message="After bean call: ${body}"/>
+        </route>
+    </camelContext>
+</beans>

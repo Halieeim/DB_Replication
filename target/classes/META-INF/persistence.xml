@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
+	
+	<persistence-unit name="camel">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:/cspdb</jta-data-source>
+		<class>org.wildfly.camel.examples.cdi.entity.Vehicle</class>
+		<class>org.wildfly.camel.examples.cdi.entity.PostgresSubscription</class>
+		<class>org.wildfly.camel.examples.cdi.entity.Account</class>
+		<class>org.wildfly.camel.examples.cdi.entity.Person</class>
+		<class>org.wildfly.camel.examples.cdi.entity.Company</class>
+		<class>org.wildfly.camel.examples.cdi.entity.Office</class>
+		<class>org.wildfly.camel.examples.cdi.entity.AccountTypeLkp</class>
+		<class>org.wildfly.camel.examples.cdi.entity.RequestSourceLkp</class>
+		
+		<properties>
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.PostgreSQLDialect" />
+			<!-- <property name="hibernate.default_schema" value="public" />--> 
+			<property name="hibernate.show_sql" value="false" />
+
+			<property name="eclipselink.logging.level.sql" value="FINE" />
+			<property name="eclipselink.logging.parameters"
+				value="false" />
+			<property name="hibernate.generate_statistics" value="false" />
+		</properties>
+
+	</persistence-unit>
+
+	<!-- MS SQL SERVER Persistence Unit -->
+	<persistence-unit name="mssql">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:/rfid</jta-data-source>
+		<class>org.wildfly.camel.examples.cdi.entity.Subscriber</class>
+		<class>org.wildfly.camel.examples.cdi.entity.MssqlSubscription</class>
+		<properties>
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.SQLServerDialect" />
+			<property name="hibernate.default_schema" value="dbo" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="eclipselink.logging.level.sql" value="FINE" />
+			<property name="eclipselink.logging.parameters"
+				value="false" />
+			<property name="hibernate.generate_statistics" value="false" />
+		</properties>
+	</persistence-unit>
+</persistence>
