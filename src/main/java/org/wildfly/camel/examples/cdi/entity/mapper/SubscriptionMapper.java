@@ -19,7 +19,7 @@ public class SubscriptionMapper {
         mssqlSubscription.setDiscount(postgresSubscription.getDiscount() != null ? postgresSubscription.getDiscount().doubleValue() : 0.0);
         mssqlSubscription.setCreatedAt(Timestamp.valueOf(postgresSubscription.getCreatedOn()));
         mssqlSubscription.setUpdatedAt(Timestamp.valueOf(postgresSubscription.getUpdatedOn()));
-        mssqlSubscription.setBillNumber(Integer.parseInt(postgresSubscription.getReceiptNumber()));
+        mssqlSubscription.setBillNumber((int) Long.parseLong(postgresSubscription.getReceiptNumber()));
         mssqlSubscription.setIsActive(postgresSubscription.getIsDeleted());
         mssqlSubscription.setIsRenewal(postgresSubscription.getRenewSubscriptionFlag());
         mssqlSubscription.setPackageId(postgresSubscription.getBundleId().intValue());
